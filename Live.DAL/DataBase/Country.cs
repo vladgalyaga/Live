@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Live.DAL.DataBase
 {
-    public class Country : IKeyable<int>
+    public class Country : Identifier
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public List<City> Cities { get; set; }
     }

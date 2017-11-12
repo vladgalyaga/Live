@@ -5,12 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Live.DAL.DataBase
+namespace Live.DAL
 {
-    public class Comment : Identifier
+    public class Identifier : IKeyable<int>
     {
-        public string Descriprion { get; set; }
-
-        public Event Event { get; set; }
+        public int Id { get; set; }
     }
 }

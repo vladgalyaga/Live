@@ -47,12 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\Identifier.cs" />
+    <Compile Include="Context.cs" />
     <Compile Include="DataBase\Assessment.cs" />
+    <Compile Include="DataBase\Chat.cs" />
     <Compile Include="DataBase\City.cs" />
     <Compile Include="DataBase\Comment.cs" />
     <Compile Include="DataBase\Country.cs" />
     <Compile Include="DataBase\Event.cs" />
     <Compile Include="DataBase\EventType.cs" />
+    <Compile Include="DataBase\Message.cs" />
     <Compile Include="DataBase\Rating.cs" />
     <Compile Include="DataBase\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 
 namespace Live.DAL.DataBase
 {
-    public class Rating:IKeyable<int>
+    public class Rating : Identifier
     {
-        public int Id { get; set; }
+        public int Weigth { get; set; }
+
+        public User User { get; set; }
+       
 
     }
 }

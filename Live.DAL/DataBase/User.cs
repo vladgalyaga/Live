@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace Live.DAL.DataBase
 {
-    public class User : IKeyable<int>
+    public class User : Identifier
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public DateTime DateOfBirth { get; set; }
+
         public City City { get; set; }
+
+        public List<User> Frands { get; set; }
     }
 }

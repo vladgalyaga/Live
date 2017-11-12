@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Live.DAL.DataBase
 {
-    public class EventType : IKeyable<int>
+    public class EventType : Identifier
     {
-        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

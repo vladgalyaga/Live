@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Live.DAL
 {
-    public class Context : DbContext
+    public class LiveContext : DbContext
     {
-        public Context() : base("DbConnection")
+        public LiveContext() : base("DbConnection")
         { }
 
         DbSet<Assessment> Assessments { get; set; }

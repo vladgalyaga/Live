@@ -18,6 +18,7 @@ namespace Dal.Core
         private IEntitiesDbContext m_DbContext;
         private bool m_IsDisposed;
 
+
         public BaseUnitOfWork(DbContext dbContext)
         {
             m_DbContext = new DbContextWrapper(dbContext);
@@ -128,5 +129,7 @@ namespace Dal.Core
             return m_DbContext.Database.SqlQuery<T>(sql).ToList();
                    
         }
+
+        
     }
 }

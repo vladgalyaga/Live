@@ -40,14 +40,7 @@ namespace Dal.Core.Interfaces
         /// <returns></returns>
         int ExecuteSqlCommand(TransactionalBehavior transactionakBehavior, String sql, params Object[] parameters);
 
-        /// <summary>
-        /// Imports a data file into a database table or view in a user-specified format in SQL Server
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="entities"></param>
-        /// <param name="batchSize"></param>
-        void BulkInsert<T>(IEnumerable<T> entities, int? batchSize = default(int?));
-
+     
         /// <summary>
         /// Gets a DbEntityEntry<TEntity> object for the given entity providing access to information about the entity and the ability to perform actions on the entity.
         /// </summary>

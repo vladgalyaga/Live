@@ -1,4 +1,5 @@
 ﻿using Dal.Core.Interfaces;
+using Live.DAL.DataBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,18 +8,20 @@ using System.Web.Mvc;
 
 namespace Live.Web.Controllers
 {
-    public class HomeController : Controller
+    public class ProfileController : Controller
     {
         IUnitOfWork _unitOfWork;
-        public HomeController(IUnitOfWork unitOfWork)
+        public ProfileController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
+        // GET: Profile
         public ActionResult Index()
         {
+            User user = HttpContext.User.Identity;
+
+
             return View();
         }
-
-        
     }
 }

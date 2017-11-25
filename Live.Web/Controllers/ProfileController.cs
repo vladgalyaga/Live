@@ -18,7 +18,7 @@ namespace Live.Web.Controllers
         // GET: Profile
         public ActionResult Index()
         {
-            User user = HttpContext.User.Identity;
+            User user = _unitOfWork.GetRepository<User, int>().GetFirstOrDefault(x => x.Email == User.Identity.Name);
 
 
             return View();

@@ -64,14 +64,9 @@
     <Compile Include="DataBase\HappeningType.cs" />
     <Compile Include="DataBase\Message.cs" />
     <Compile Include="DataBase\Rating.cs" />
-    <Compile Include="DataBase\UserOld.cs" />
-    <Compile Include="DataBase\Identity\Login.cs" />
+    <Compile Include="DataBase\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DataBase\Identity\Role.cs" />
     <Compile Include="UnitOfWork.cs" />
-    <Compile Include="DataBase\Identity\User.cs" />
-    <Compile Include="DataBase\Identity\UserClaim.cs" />
-    <Compile Include="DataBase\Identity\UserRole.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Live.DAL.Core\Live.DAL.Core.csproj">

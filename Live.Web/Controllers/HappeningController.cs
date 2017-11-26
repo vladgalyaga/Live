@@ -12,7 +12,7 @@ namespace Live.Web.Controllers
 {
     public class HappeningController : Controller
     {
-       
+
         IUnitOfWork _unitOfWork;
         int _pageSize = 18;
         IRepository<Happening, int> _happeningRepository;
@@ -25,10 +25,9 @@ namespace Live.Web.Controllers
         // GET: Event
         public ActionResult Index()
         {
-            var events = _happeningRepository.GetAll();
-            return View(events);
+            return GetHappenings();
         }
-        public async Task<string> GetImageProductById(int Id)
+        public async Task<string> GetImageEventById(int Id)
         {
             // Products prod = m_storeRepository.GetProduct(productId);
             Happening happaning = await _unitOfWork.GetRepository<Happening, int>().FindByIdAsync(Id);
@@ -46,7 +45,7 @@ namespace Live.Web.Controllers
             _happeningRepository.Create(happening);
             return Json(true, JsonRequestBehavior.AllowGet);
         }
-        public ViewResult GetHappening(string type, int page = 1)
+        public ViewResult GetHappenings(int page = 1, string type = null)
         {
             List<Happening> events;
             if (type == null)
@@ -54,19 +53,31 @@ namespace Live.Web.Controllers
             else
                 events = _happeningRepository.GetWhere(x => x.EventType.Name == type);
             if (page <= 0)
-                page = 1; 
+                page = 1;
             ViewBag.Page = page;
             ViewBag.EnablePrevButton = page != 1;
             ViewBag.EnableNextButton = events.Count > ((page) * _pageSize);
             events = events.OrderBy(x => x.Id)
                 .Skip((page - 1) * _pageSize)
                 .Take(_pageSize).ToList();
-            return View(events);
+            return View("Index", events);
         }
         public ViewResult EnterEventType(string type)
         {
             ViewBag.Type = type;
-            return GetHappening(type, 1);
+            return GetHappenings( 1, type);
+        }
+        public RedirectToRouteResult JoinToEvent(int Id, string returnUrl)
+        {
+            var event1 = _happeningRepository.Find(Id);
+
+            if (event1 != null)
+            {
+                var rep = _unitOfWork.GetRepository<User, int>();
+                var user = rep.GetFirstOrDefault(x => x.Name == User.Identity.Name);
+                event1.Participants.Add(user);
+            }
+            return RedirectToAction("Index", new { returnUrl });
         }
     }
 }

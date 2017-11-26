@@ -28,10 +28,7 @@ namespace Dal.Core
             }
             set
             {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(DbContext));
-
-                m_DbContext = value;
+                m_DbContext = value ?? throw new ArgumentNullException(nameof(DbContext));
             }
         }
 

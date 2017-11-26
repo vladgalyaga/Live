@@ -8,20 +8,22 @@ using System.Web.Mvc;
 
 namespace Live.Web.Controllers
 {
-    public class ProfileController : Controller
+    public class ChatsController : Controller
     {
+
         IUnitOfWork _unitOfWork;
-        public ProfileController(IUnitOfWork unitOfWork)
+        public ChatsController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
-        // GET: Profile
+        // GET: Chants
         public ActionResult Index()
         {
-            User user = _unitOfWork.GetRepository<User, int>().GetFirstOrDefault(x => x.Name == User.Identity.Name);
-
-
-            return View();
+            var userRep = _unitOfWork.GetRepository<User, int>();
+            var user = userRep.GetSingleOrDefault(x => x.Name == User.Identity.Name);
+            var Chats = user?.Chats;
+            return View(Chats);
         }
+
     }
 }

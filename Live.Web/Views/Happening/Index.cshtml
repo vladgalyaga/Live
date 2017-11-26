@@ -1,0 +1,65 @@
+﻿@model List<Live.DAL.DataBase.Happening>
+
+<style>
+    .frame {
+        height: 200px; /* equals max image height */
+        width: 100%;
+        white-space: nowrap;
+        text-align: center;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .helper {
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+        margin: 0;
+        padding: 0;
+    }
+
+    .imgWrap {
+        vertical-align: middle;
+        max-height: 250px;
+        margin: 0;
+        width: 80%;
+    }
+</style>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail" style="padding:0px; height: 380px">
+
+                <div class=frame>
+                    <span class="helper"></span>
+                    <img src="@Url.Action("GetImageEventById", "Happening", new { Id = item.Id })" class="imgWrap" />
+                </div>
+
+                <div class="caption">
+                    <h3>@Html.DisplayFor(modelItem => item.Name)</h3>
+                    <p>@Html.DisplayFor(modelItem => item.TimeOfConduction)</p>
+                    <p>
+                        <a href="@Url.Action("JoinToEvent", "Happening",new { Id = item.Id, returnUrl = Request.Url.PathAndQuery })" class="btn btn-primary" role="button">Join</a>
+                        <a href="@Url.Action("ShowEvent", "Happening", new { Id = item })" class="btn btn-default" role="button">Show</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<ul class="pager">
+    @if (ViewBag.EnablePrevButton == true)
+    {
+        <li class="previous">
+            @Html.ActionLink("Prev", "GetHappenings", new { type = ViewBag.Type, page = ViewBag.Page - 1 })
+        </li>
+    }
+    @if (ViewBag.EnableNextButton == true)
+    {
+        <li class="next">
+            @Html.ActionLink("Next", "GetHappenings", new { type = ViewBag.Type, page = ViewBag.Page + 1 })
+        </li>
+    }
+</ul>

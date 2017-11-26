@@ -11,6 +11,6 @@ namespace Live.DAL.DataBase
     {
         public string Descriprion { get; set; }
 
-        public Event Event { get; set; }
+        public Happening Event { get; set; }
     }
 }

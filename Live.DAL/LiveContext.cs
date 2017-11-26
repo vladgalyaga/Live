@@ -18,8 +18,8 @@ namespace Live.DAL
         DbSet<City> Cities { get; set; }
         DbSet<Comment> Comments { get; set; }
         DbSet<Country> Countries { get; set; }
-        DbSet<Event> Events { get; set; }
-        DbSet<EventType> EventTypes { get; set; }
+        DbSet<Happening> Events { get; set; }
+        DbSet<HappeningType> EventTypes { get; set; }
         DbSet<Message> Messages { get; set; }
         DbSet<Rating> Ratings { get; set; }
         DbSet<User> Users { get; set; }

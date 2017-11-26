@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace Live.DAL.DataBase
 {
-    public class EventType : Identifier
+    public class HappeningType : Identifier
     {
         public string Name { get; set; }
+
+        public List<Happening> Events { get; set; }
     }
 }

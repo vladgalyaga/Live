@@ -19,5 +19,6 @@ namespace Live.DAL.DataBase
         public List<User> Frands { get; set; }
         public List<Happening> Events { get; set; }
         public List<Chat> Chats { get; set; }
+        public List<Happening> CreatedEvents { get; set; }
     }
 }

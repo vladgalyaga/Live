@@ -1,4 +1,6 @@
-﻿using Dal.Core.Interfaces;
+﻿using Common.ViewModels;
+using Dal.Core.Interfaces;
+using Live.BLL;
 using Live.DAL.DataBase;
 using System;
 using System.Collections.Generic;
@@ -16,11 +18,13 @@ namespace Live.Web.Controllers
         IUnitOfWork _unitOfWork;
         int _pageSize = 18;
         IRepository<Happening, int> _happeningRepository;
+        CityManager _cityManager;
         string _photo = "someUrl";
-        public HappeningController(IUnitOfWork unitOfWork)
+        public HappeningController(IUnitOfWork unitOfWork, CityManager cityManager)
         {
             _unitOfWork = unitOfWork;
             _happeningRepository = unitOfWork.GetRepository<Happening, int>();
+            _cityManager = cityManager;
         }
         // GET: Event
         public ActionResult Index()
@@ -40,8 +44,24 @@ namespace Live.Web.Controllers
                 return _photo;
             }
         }
-        public ActionResult AddHappening(Happening happening)
+        [HttpGet]
+        public ActionResult AddHappening()
         {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddHappening(HappeningViewModel happeningViewModel)
+        {
+            var a = _unitOfWork.GetRepository<User, int>().GetFirstOrDefault(x => x.Name == User.Identity.Name);
+            Happening happening = new Happening()
+            {
+                City = _cityManager.GetOrCreateCity(happeningViewModel.City),
+                Creater = _unitOfWork.GetRepository<User, int>().GetFirst(x => x.Name == User.Identity.Name),
+                EventType = _cityManager.GetOrCreateHappeningType(happeningViewModel.EventType),
+                Name = happeningViewModel.Name,
+                PhotoUrl = happeningViewModel.PhotoUrl,
+                TimeOfConduction = happeningViewModel.TimeOfConduction,
+            };
             _happeningRepository.Create(happening);
             return Json(true, JsonRequestBehavior.AllowGet);
         }
@@ -65,7 +85,7 @@ namespace Live.Web.Controllers
         public ViewResult EnterEventType(string type)
         {
             ViewBag.Type = type;
-            return GetHappenings( 1, type);
+            return GetHappenings(1, type);
         }
         public RedirectToRouteResult JoinToEvent(int Id, string returnUrl)
         {

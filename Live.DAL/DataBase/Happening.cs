@@ -15,6 +15,7 @@ namespace Live.DAL.DataBase
         
         public City City { get; set; }
         public HappeningType EventType { get; set; }
+        public User Creater { get; set; }
 
         public List<User> Participants { get; set; }
         public List<Comment> Comments { get; set; }

@@ -40,7 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CityManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Live.DAL.Core\Live.DAL.Core.csproj">
+      <Project>{63BDF8A3-86F7-4219-86C9-F51625000A9D}</Project>
+      <Name>Live.DAL.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Live.DAL\Live.DAL.csproj">
+      <Project>{486F0E3E-BCB9-45EA-B522-3B60D75956BE}</Project>
+      <Name>Live.DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

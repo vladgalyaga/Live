@@ -276,6 +276,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Happening\Index.cshtml" />
     <Content Include="Views\Chats\Index.cshtml" />
+    <Content Include="Views\Happening\AddHappening.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -295,6 +296,14 @@
     <Content Include="fonts\Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Live.Common.csproj">
+      <Project>{703968ab-1367-4858-ab42-2f4a80616aef}</Project>
+      <Name>Live.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Live.BLL\Live.BLL.csproj">
+      <Project>{43564550-5185-465c-9fbe-1f22655af0af}</Project>
+      <Name>Live.BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Live.DAL.Core\Live.DAL.Core.csproj">
       <Project>{63BDF8A3-86F7-4219-86C9-F51625000A9D}</Project>
       <Name>Live.DAL.Core</Name>

@@ -12,6 +12,7 @@ namespace Live.Web.App_Start
     using Ninject.Web.Common;
     using Live.DAL;
     using Dal.Core.Interfaces;
+    using Live.BLL;
 
     public static class NinjectWebCommon 
     {
@@ -57,6 +58,8 @@ namespace Live.Web.App_Start
         {
             kernel.Bind<LiveContext>().ToSelf().InRequestScope();
             kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InRequestScope().WithConstructorArgument("dbContext", context => context.Kernel.Get<LiveContext>());
+            kernel.Bind<CityManager>().ToSelf().InRequestScope();
+
 
         }
     }

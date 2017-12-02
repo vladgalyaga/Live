@@ -1,0 +1,63 @@
+﻿@model Live.DAL.DataBase.Happening
+
+@{
+    ViewBag.Title = "Show Happening";
+}
+
+<div class="wrapper">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="content">
+                <div class="product-logo">
+                    <img src="@Url.Action("GetImageEventById", new { Id = Model.Id })" style="max-width: 300px">
+                </div>
+                <a href="@Url.Action("JoinToEvent", "Happening", new { Id = Model.Id })" class="btn btn-primary" role="button" >Join</a>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="content">
+                <h3 class="title">
+                    @Html.DisplayFor(x => x.Name)
+                </h3>
+                <ul class="properties">
+                    <li>
+                        <span>Type of event: </span>
+                        @Html.DisplayFor(x => x.EventType.Name)
+                    </li>
+                </ul>
+                <ul class="properties">
+                    <li>
+                        <span>City: </span>
+
+                        @Html.DisplayFor(x => x.City.Name)
+                    </li>
+                </ul>
+                <ul class="properties">
+                    <li>
+                        <span>Creater: </span>
+                        @Html.ActionLink(Model.Creater.Name + ", ", "ShowProfile", "Profile", new { id = Model.Creater.Id }, null)
+                    </li>
+                </ul>
+                <ul class="properties">
+                    <li>
+                        <span>Time of conduction: </span>
+                        @Html.DisplayFor(x => x.TimeOfConduction)
+                    </li>
+                </ul>
+                <ul class="properties">
+                    <li>
+                        <span>Participants: </span>
+                        @foreach (var participant in Model.Participants)
+                        {
+                           @Html.ActionLink(participant.Name+ ", ", "ShowProfile", "Profile", new { id = participant.Id }, null)
+                        }
+                        
+                    </li>
+                </ul>
+               
+            </div>
+        </div>
+    </div>
+</div>
+

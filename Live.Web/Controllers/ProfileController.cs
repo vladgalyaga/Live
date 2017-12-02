@@ -49,7 +49,7 @@ namespace Live.Web.Controllers
         {
             var user = _userREpository.Find(id);
 
-            return View(user);
+            return View("Index",user);
         }
 
     }

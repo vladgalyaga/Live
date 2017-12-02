@@ -20,7 +20,8 @@
 
     .imgWrap {
         vertical-align: middle;
-        max-height: 250px;
+        max-height: 200px;
+        max-width: 150px;
         margin: 0;
         width: 80%;
     }
@@ -47,7 +48,7 @@
                     <p>@Html.DisplayFor(modelItem => item.TimeOfConduction)</p>
                     <p>
                         <a href="@Url.Action("JoinToEvent", "Happening", new { Id = item.Id, returnUrl = Request.Url.PathAndQuery })" class="btn btn-primary" role="button">Join</a>
-                        <a href="@Url.Action("ShowEvent", "Happening", new { Id = item })" class="btn btn-default" role="button">Show</a>
+                        <a href="@Url.Action("Show", "Happening", new { id = item.Id })" class="btn btn-default" role="button">Show</a>
                     </p>
                 </div>
             </div>

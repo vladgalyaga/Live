@@ -112,6 +112,9 @@ namespace Live.Web.Controllers
         }
         public ActionResult Show(int id)
         {
+            var users = _unitOfWork.GetRepository<User, int>().GetAll();
+            var eventTypes = _unitOfWork.GetRepository<HappeningType, int>().GetAll();
+            var cities = _unitOfWork.GetRepository<City, int>().GetAll();
             var rep = _unitOfWork.GetRepository<Happening, int>();
             Happening happening = rep.Find(id);
 

@@ -392,6 +392,7 @@
     <Content Include="Views\Friends\Index.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Chats\Show.cshtml" />
+    <Content Include="Views\Happening\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

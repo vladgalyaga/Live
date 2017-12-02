@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Live.Web.Models;
+using Live.DAL.DataBase;
+using Dal.Core.Interfaces;
 
 namespace Live.Web.Controllers
 {
@@ -17,15 +19,18 @@ namespace Live.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IUnitOfWork _unitOfWork;
 
-        public AccountController()
+        public AccountController(IUnitOfWork unitOfWork)
         {
+            _unitOfWork = unitOfWork;
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IUnitOfWork unitOfWork ):this(unitOfWork)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+   
         }
 
         public ApplicationSignInManager SignInManager
@@ -155,6 +160,12 @@ namespace Live.Web.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    var myUser = new User()
+                    {
+                        Name = user.Email
+                    };
+                    _unitOfWork.GetRepository<User, int>().Create(myUser);
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

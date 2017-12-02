@@ -52,11 +52,11 @@ namespace Live.Web.Controllers
         [HttpPost]
         public ActionResult AddHappening(HappeningViewModel happeningViewModel)
         {
-            var a = _unitOfWork.GetRepository<User, int>().GetFirstOrDefault(x => x.Name == User.Identity.Name);
+            var a = _unitOfWork.GetRepository<User, int>().GetFirstOrDefault(x => x.Name == User?.Identity?.Name);
             Happening happening = new Happening()
             {
                 City = _cityManager.GetOrCreateCity(happeningViewModel.City),
-                Creater = _unitOfWork.GetRepository<User, int>().GetFirst(x => x.Name == User.Identity.Name),
+                Creater = a,
                 EventType = _cityManager.GetOrCreateHappeningType(happeningViewModel.EventType),
                 Name = happeningViewModel.Name,
                 PhotoUrl = happeningViewModel.PhotoUrl,

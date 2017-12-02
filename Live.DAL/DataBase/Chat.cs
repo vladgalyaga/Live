@@ -8,9 +8,9 @@ namespace Live.DAL.DataBase
 {
     public class Chat : Identifier
     {
-        public string Text { get; set; }
 
 
+        public string Name { get; set; }
         public User Creator { get; set; }
 
         public List<User> Users { get; set; }

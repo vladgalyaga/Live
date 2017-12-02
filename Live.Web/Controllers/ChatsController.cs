@@ -12,9 +12,11 @@ namespace Live.Web.Controllers
     {
 
         IUnitOfWork _unitOfWork;
+        IRepository<Chat, int> _chatRepository;
         public ChatsController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+            _chatRepository = unitOfWork.GetRepository<Chat, int>();
         }
         // GET: Chants
         public ActionResult Index()
@@ -24,6 +26,24 @@ namespace Live.Web.Controllers
             var Chats = user?.Chats;
             return View(Chats);
         }
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult Create(Chat chat)
+        {
+            var user = _unitOfWork.GetRepository<User, int>().GetFirstOrDefault(x => x.Name == User?.Identity?.Name);
+            Chat newChat = new Chat()
+            {
+                Creator = user,
+                Users = chat.Users,
+                Name = chat.Name,
+            };
+            _chatRepository.Create(newChat);
+            return Index();
+        }
     }
 }

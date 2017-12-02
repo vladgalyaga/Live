@@ -27,8 +27,11 @@
 </style>
 
 <div class="row">
-    @foreach (var item in Model)
+    
+    @if (Model != null)
     {
+        foreach (var item in Model)
+        {
         <div class="col-sm-6 col-md-4">
             <div class="thumbnail" style="padding:0px; height: 380px">
 
@@ -41,12 +44,13 @@
                     <h3>@Html.DisplayFor(modelItem => item.Name)</h3>
                     <p>@Html.DisplayFor(modelItem => item.TimeOfConduction)</p>
                     <p>
-                        <a href="@Url.Action("JoinToEvent", "Happening",new { Id = item.Id, returnUrl = Request.Url.PathAndQuery })" class="btn btn-primary" role="button">Join</a>
+                        <a href="@Url.Action("JoinToEvent", "Happening", new { Id = item.Id, returnUrl = Request.Url.PathAndQuery })" class="btn btn-primary" role="button">Join</a>
                         <a href="@Url.Action("ShowEvent", "Happening", new { Id = item })" class="btn btn-default" role="button">Show</a>
                     </p>
                 </div>
             </div>
         </div>
+        }
     }
 </div>
 <ul class="pager">

@@ -24,13 +24,24 @@ namespace Live.Web.Controllers
             m_photo = webClient.DownloadData("https://pp.userapi.com/c314424/v314424856/4893/1Zt8KXbMRqo.jpg");
 
         }
+        [HttpGet]
+        public ActionResult Edit()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Edit(User user)
+        {
+            return View();
+
+        }
         // GET: Profile
         public ActionResult Index()
         {
             User user = _unitOfWork.GetRepository<User, int>().GetFirstOrDefault(x => x.Name == User.Identity.Name);
 
-
-           return View(user);
+            ViewBag.CurrentUser = true;
+            return View(user);
         }
         public async Task<FileContentResult> GetImageById(int Id)
         {
@@ -48,9 +59,12 @@ namespace Live.Web.Controllers
         public ActionResult ShowProfile(int id)
         {
             var user = _userREpository.Find(id);
-
-            return View("Index",user);
+            ViewBag.CurrentUser = false;
+            return View("Index", user);
         }
-
+        public bool IsCurrentProfile(int id)
+        {
+            return id == GetCurrentUser().Id;
+        }
     }
 }

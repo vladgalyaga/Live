@@ -11,8 +11,14 @@
                 <div class="product-logo">
                     <img src="@Url.Action("GetImageById", new { Id = Model.Id })">
                 </div>
-                <a href="@Url.Action("Show", "Chats", new { userId = Model.Id})" class="btn btn-primary" role="button">Chat</a>
-
+                @if (!ViewBag.CurrentUser)
+                {
+                <a href="@Url.Action("Show", "Chats", new { userId = Model.Id })" class="btn btn-primary" role="button">Chat</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Edit", "Profile")" class="btn btn-primary" role="button">Edit</a>
+                }
             </div>
         </div>
         <div class="col-md-6">

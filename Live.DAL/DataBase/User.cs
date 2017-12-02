@@ -15,6 +15,9 @@ namespace Live.DAL.DataBase
         public string Photo { get; set; }
 
         public City City { get; set; }
+      //  public DateTime DateOfBirth { get; set; }
+
+
 
     //    public virtual List<Friendship> Friendships { get; set; }
         public virtual ICollection<Happening> Events { get; set; }

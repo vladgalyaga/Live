@@ -54,7 +54,7 @@
                         <p>@Html.DisplayFor(modelItem => item.City)</p>
                         <p>
                             <a href="@Url.Action("Show", "Chats", new { userId = item.Id})" class="btn btn-primary" role="button">Chat</a>
-                            <a href="@Url.Action("Show", "Profile", new { Id = item })" class="btn btn-default" role="button">Show</a>
+                            <a href="@Url.Action("ShowProfile", "Profile", new { id = item.Id })" class="btn btn-default" role="button">Show</a>
                         </p>
                     </div>
                 </div>

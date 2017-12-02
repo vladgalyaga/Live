@@ -21,6 +21,11 @@ namespace Live.Web.Controllers
         {
             return _unitOfWork.GetRepository<User, int>().GetFirstOrDefault(x => x.Name == User?.Identity?.Name);
         }
+        public User GetUser(int id)
+        {
+            var rep = _unitOfWork.GetRepository<User, int>();
+            return rep.Find(id);
+        }
         public List<User> GetFriends(int id)
         {
             

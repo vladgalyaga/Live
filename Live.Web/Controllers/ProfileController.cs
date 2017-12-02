@@ -30,7 +30,7 @@ namespace Live.Web.Controllers
             User user = _unitOfWork.GetRepository<User, int>().GetFirstOrDefault(x => x.Name == User.Identity.Name);
 
 
-           return ShowProfile(user.Id);
+           return View(user);
         }
         public async Task<FileContentResult> GetImageById(int Id)
         {
@@ -51,5 +51,6 @@ namespace Live.Web.Controllers
 
             return View(user);
         }
+
     }
 }

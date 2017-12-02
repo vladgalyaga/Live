@@ -53,7 +53,7 @@
                         <h3>@Html.DisplayFor(modelItem => item.Name)</h3>
                         <p>@Html.DisplayFor(modelItem => item.City)</p>
                         <p>
-                            <a href="@Url.Action("Show", "Chat", new { Id = item.Id, returnUrl = Request.Url.PathAndQuery })" class="btn btn-primary" role="button">Chat</a>
+                            <a href="@Url.Action("Show", "Chats", new { userId = item.Id})" class="btn btn-primary" role="button">Chat</a>
                             <a href="@Url.Action("Show", "Profile", new { Id = item })" class="btn btn-default" role="button">Show</a>
                         </p>
                     </div>

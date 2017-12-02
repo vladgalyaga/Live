@@ -5,6 +5,7 @@ using Live.DAL.DataBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
@@ -20,28 +21,33 @@ namespace Live.Web.Controllers
         IRepository<Happening, int> _happeningRepository;
         CityManager _cityManager;
         string _photo = "someUrl";
+        WebClient _webClient = new WebClient();
+        byte[] m_photo;
         public HappeningController(IUnitOfWork unitOfWork, CityManager cityManager)
         {
             _unitOfWork = unitOfWork;
             _happeningRepository = unitOfWork.GetRepository<Happening, int>();
             _cityManager = cityManager;
+
+            m_photo = _webClient.DownloadData("http://www.mencapliverpool.org.uk/wp-content/uploads/2014/12/activities.png");
+
         }
         // GET: Event
         public ActionResult Index()
         {
             return GetHappenings();
         }
-        public async Task<string> GetImageEventById(int Id)
+        public async Task<FileContentResult> GetImageEventById(int Id)
         {
             // Products prod = m_storeRepository.GetProduct(productId);
             Happening happaning = await _unitOfWork.GetRepository<Happening, int>().FindByIdAsync(Id);
             if (happaning.PhotoUrl != null)
             {
-                return happaning.PhotoUrl;
+                return new FileContentResult(_webClient.DownloadData(happaning.PhotoUrl), "image/jpeg");
             }
             else
             {
-                return _photo;
+                return new FileContentResult(m_photo, "image/jpeg");
             }
         }
         [HttpGet]
@@ -87,6 +93,7 @@ namespace Live.Web.Controllers
             ViewBag.Type = type;
             return GetHappenings(1, type);
         }
+
         public RedirectToRouteResult JoinToEvent(int Id, string returnUrl)
         {
             var event1 = _happeningRepository.Find(Id);
@@ -95,9 +102,20 @@ namespace Live.Web.Controllers
             {
                 var rep = _unitOfWork.GetRepository<User, int>();
                 var user = rep.GetFirstOrDefault(x => x.Name == User.Identity.Name);
-                event1.Participants.Add(user);
+                if (!event1.Participants.Contains(user))
+                {
+                    event1.Participants.Add(user);
+                    _unitOfWork.SaveChanges();
+                }
             }
             return RedirectToAction("Index", new { returnUrl });
+        }
+        public ActionResult Show(int id)
+        {
+            var rep = _unitOfWork.GetRepository<Happening, int>();
+            Happening happening = rep.Find(id);
+
+            return View(happening);
         }
     }
 }

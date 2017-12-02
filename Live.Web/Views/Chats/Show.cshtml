@@ -1,0 +1,61 @@
+﻿@model Live.DAL.DataBase.Chat
+
+@{
+    ViewBag.Title = "Show";
+}
+
+<h2>Show</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        @if (Model.Messages != null)
+        {
+            foreach (var item in Model.Messages)
+            {
+                <blockquote>
+                    @item.Text
+                    @if (item.Author != null)
+                    {
+                        <footer>@item.Author.Name </footer>
+                    }
+                </blockquote>
+            }
+        }
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        <div class="form-group">
+            <label for="exampleInputEmail1">Enter new message</label>
+            <textarea class="form-control" id="new-message" name="new-message" rows="3"></textarea>
+        </div>
+        <button id="sent" type="submit" class="btn btn-default">Submit</button>
+
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#sent').on('click', function () {
+            $.ajax({
+                type: 'POST',
+                url: '/Chats/SentMessage',
+                data: {
+                    text : $("#new-message").val(),
+                    chatId : @Model.Id
+                },
+                success: function (data, textStatus, jqXHR) {
+                    location.reload();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    // jqXHR.status contains the Response.Status set on the server
+                }
+                    });
+        });
+    });
+</script>

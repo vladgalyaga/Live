@@ -22,11 +22,6 @@
                 @Html.ActionLink("Имя приложения", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
-                    <li>@Html.ActionLink("О программе", "About", "Home")</li>
-                    <li>@Html.ActionLink("Контакт", "Contact", "Home")</li>
-                </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
@@ -35,7 +30,7 @@
         <div class="row">
             <div class="col-md-2">
                 <ul class="nav nav-pills nav-stacked">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Profile")</li>
                     <li>@Html.ActionLink("Events", "Index", "Happening")</li>
                     <li>@Html.ActionLink("Chats", "Index", "Chats")</li>
                     <li>@Html.ActionLink("Friends", "Index", "Friends")</li>

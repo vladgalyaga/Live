@@ -1,0 +1,33 @@
+﻿@model Live.DAL.DataBase.User
+
+@{
+    ViewBag.Title = "ShowProfile";
+}
+
+<div class="wrapper">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="content">
+                <div class="product-logo">
+                    <img src="@Url.Action("GetImageById", new { Id = Model.Id })">
+                </div>
+                <a href="@Url.Action("Show", "Chats", new { userId = Model.Id})" class="btn btn-primary" role="button">Chat</a>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="content">
+                <h3 class="title">
+                    @Html.DisplayFor(x => x.Name)
+                </h3>
+                <ul class="properties">
+                    <li>
+                        <span>City: </span>
+
+                        @Html.DisplayFor(x => x.City)
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

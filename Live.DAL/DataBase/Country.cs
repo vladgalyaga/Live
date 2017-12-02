@@ -10,6 +10,6 @@ namespace Live.DAL.DataBase
     public class Country : Identifier
     {
         public string Name { get; set; }
-        public List<City> Cities { get; set; }
+        public virtual List<City> Cities { get; set; }
     }
 }

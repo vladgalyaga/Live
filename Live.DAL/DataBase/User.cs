@@ -16,9 +16,9 @@ namespace Live.DAL.DataBase
 
         public City City { get; set; }
 
-        public List<User> Frands { get; set; }
-        public List<Happening> Events { get; set; }
-        public List<Chat> Chats { get; set; }
-        public List<Happening> CreatedEvents { get; set; }
+    //    public virtual List<Friendship> Friendships { get; set; }
+        public virtual List<Happening> Events { get; set; }
+        public virtual List<Chat> Chats { get; set; }
+        public virtual List<Happening> CreatedEvents { get; set; }
     }
 }

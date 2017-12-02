@@ -23,5 +23,6 @@ namespace Live.DAL
         DbSet<Message> Messages { get; set; }
         DbSet<Rating> Ratings { get; set; }
         DbSet<User> Users { get; set; }
+        DbSet<Friendship> Friendships { get; set; }
     }
 }

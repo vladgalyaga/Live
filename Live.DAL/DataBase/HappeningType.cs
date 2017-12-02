@@ -11,6 +11,6 @@ namespace Live.DAL.DataBase
     {
         public string Name { get; set; }
 
-        public List<Happening> Events { get; set; }
+        public virtual List<Happening> Events { get; set; }
     }
 }

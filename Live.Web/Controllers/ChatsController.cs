@@ -8,14 +8,12 @@ using System.Web.Mvc;
 
 namespace Live.Web.Controllers
 {
-    public class ChatsController : Controller
+    public class ChatsController : BaseController
     {
 
-        IUnitOfWork _unitOfWork;
         IRepository<Chat, int> _chatRepository;
-        public ChatsController(IUnitOfWork unitOfWork)
+        public ChatsController(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-            _unitOfWork = unitOfWork;
             _chatRepository = unitOfWork.GetRepository<Chat, int>();
         }
         // GET: Chants
@@ -26,12 +24,6 @@ namespace Live.Web.Controllers
             var Chats = user?.Chats;
             return View(Chats);
         }
-        [HttpGet]
-        public ActionResult Create()
-        {
-            return View();
-        }
-
         [HttpPost]
         public ActionResult Create(Chat chat)
         {
@@ -45,5 +37,15 @@ namespace Live.Web.Controllers
             _chatRepository.Create(newChat);
             return Index();
         }
+        //[HttpGet]
+        //public List<User> GetFriendsForNewChat()
+        //{
+        //    var user = GetCurrentUser();
+        //    var friends = user.Friendships;
+        //    var ls = user.Chats.Where(x => x.Users.Count == 1);
+        //    friends = friends.Where(x => ls.All(c => !c.Users.Contains(x))).ToList();
+
+        //    return friends;
+        //}
     }
 }

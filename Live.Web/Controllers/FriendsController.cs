@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Live.Web.Controllers
 {
+    [Authorize]
     public class FriendsController : BaseController
     {
         IRepository<User, int> _userRepository;
@@ -20,16 +21,32 @@ namespace Live.Web.Controllers
         // GET: Frands
         public ActionResult Index()
         {
-            return View(GetFriends());
+            var a = GetFriends();
+            return View(a);
         }
         [HttpPost]
         public ActionResult AddFriend(string name)
         {
-            var newFrand = _userRepository.GetFirstOrDefault(x => x.Name == name);
-            if (newFrand != null || !GetFriends().Contains(newFrand))
+            try
             {
-                GetCurrentUser().Frands.Add(newFrand);
-                _unitOfWork.SaveChanges();
+                var newFrand = _userRepository.GetFirstOrDefault(x => x.Name == name);
+                if (newFrand != null || !GetFriends().Contains(newFrand))
+                {
+                    var user = GetCurrentUser();
+                    var frendShip = new Friendship()
+                    {
+                        User2_Id = user.Id,
+                        User1_Id = newFrand.Id
+                    };
+                    _unitOfWork.GetRepository<Friendship, int>().Create(frendShip);
+                }
+                var a = _unitOfWork.GetRepository<Friendship, int>().GetAll();
+                return Index();
+
+            }
+            catch (Exception ex)
+            {
+                var a = 3;
             }
             return Index();
         }
@@ -39,10 +56,8 @@ namespace Live.Web.Controllers
 
         private List<User> GetFriends()
         {
-            var user = GetCurrentUser();
-            if (user == null)
-                return new List<User>();
-            return user.Frands;
+            var friends = GetFriends(GetCurrentUser().Id);
+           return friends;
         }
     }
 }

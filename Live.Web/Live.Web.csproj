@@ -389,13 +389,12 @@
     <Content Include="Views\Chats\Index.cshtml" />
     <Content Include="Views\Happening\AddHappening.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Chats\Create.cshtml" />
     <Content Include="Views\Friends\Index.cshtml" />
+    <Content Include="Views\Profile\ShowProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\Profile\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

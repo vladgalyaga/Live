@@ -13,6 +13,6 @@ namespace Live.DAL.DataBase
 
         public Country Country { get; set; }
         
-        public List<User> Users { get; set; }
+        public virtual List<User> Users { get; set; }
     }
 }

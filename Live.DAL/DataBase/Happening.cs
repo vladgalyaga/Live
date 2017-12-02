@@ -17,7 +17,7 @@ namespace Live.DAL.DataBase
         public HappeningType EventType { get; set; }
         public User Creater { get; set; }
 
-        public List<User> Participants { get; set; }
-        public List<Comment> Comments { get; set; }
+        public virtual List<User> Participants { get; set; }
+        public virtual List<Comment> Comments { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace Live.DAL.DataBase
         public string Name { get; set; }
         public User Creator { get; set; }
 
-        public List<User> Users { get; set; }
+        public virtual List<User> Users { get; set; }
 
 
     }

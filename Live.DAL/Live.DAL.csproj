@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\Identifier.cs" />
+    <Compile Include="DataBase\Friendship.cs" />
     <Compile Include="LiveContext.cs" />
     <Compile Include="DataBase\Assessment.cs" />
     <Compile Include="DataBase\Chat.cs" />

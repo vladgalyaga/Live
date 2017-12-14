@@ -22,8 +22,9 @@ namespace Live.Web.Controllers
         public ActionResult Index()
         {
 
-            var chats = GetChatsForUser(GetCurrentUser().Id);
-            var chatsViewModel = chats.Select(x => new ChatViewModel() { Id = x.Id, Name = GetChatName(x) });
+            //var chats = GetChatsForUser(GetCurrentUser().Id);
+            var chats = GetCurrentUser().Chats;
+            var chatsViewModel = chats.Select(x => new ChatViewModel() { Id = x.Id, Name = GetChatName(x) }).ToList();
 
             return View(chatsViewModel);
         }
@@ -33,29 +34,27 @@ namespace Live.Web.Controllers
             var user = _unitOfWork.GetRepository<User, int>().GetFirstOrDefault(x => x.Name == User?.Identity?.Name);
             Chat newChat = new Chat()
             {
-                Creator = user,
                 Users = chat.Users,
                 Name = chat.Name,
             };
+            newChat.Users.Add(user);
             _chatRepository.Create(newChat);
             return Index();
         }
         public ActionResult Show(int userId)
         {
             var user = GetCurrentUser();
-            var chats = _chatRepository.GetWhere(x => x.Users.Count == 1);
-            var chat = chats.Where(x => x.Creator == user).FirstOrDefault(x => x.Users.First().Id == userId);
-            if (chat == null)
-            {
-                chat = chats.Where(x => x.Creator.Id == userId).FirstOrDefault(x => x.Users.First() == user);
-            }
+            var chats = _chatRepository.GetAll() ;
+            var chat = chats.FirstOrDefault(x => x.Users.First().Id == userId);
+          
             if (chat == null)
             {
                 chat = new Chat()
                 {
-                    Creator = user,
+                 
                     Users = new List<DAL.DataBase.User>() { _unitOfWork.GetRepository<User, int>().Find(userId) }
                 };
+                chat.Users.Add(user);
                 _chatRepository.Create(chat);
             }
 
@@ -89,7 +88,6 @@ namespace Live.Web.Controllers
         {
             User user = _unitOfWork.GetRepository<User, int>().Find(userId);
             var chats = new List<Chat>();
-            chats.AddRange(_chatRepository.GetWhere(x => x.Creator == user));
             chats.AddRange(_chatRepository.GetWhere(x => x.Users.Contains(user)));
             return chats;
         }
@@ -97,9 +95,10 @@ namespace Live.Web.Controllers
         {
             if (chat.Name != null)
                 return chat.Name;
-            string[] names = chat.Users.Select(x => x.Name).ToArray();
-            var name = string.Join(", ", names);
-            return name + ", " + chat.Creator.Name;
+       
+            string[] names = chat.Users?.Select(x => x.Name).ToArray();
+            return string.Join(", ", names);
+           
         }
         //[HttpGet]
         //public List<User> GetFriendsForNewChat()

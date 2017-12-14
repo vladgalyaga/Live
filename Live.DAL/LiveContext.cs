@@ -13,6 +13,26 @@ namespace Live.DAL
         public LiveContext() : base("DbConnection")
         { }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Chat>()
+                  .HasMany(t => t.Users)
+                   .WithMany(t => t.Chats);
+
+            modelBuilder.Entity<User>()
+               .HasMany(t => t.Events)
+                .WithMany(t => t.Participants);
+
+            modelBuilder.Entity<User>()
+            .HasMany(t => t.CreatedEvents)
+             .WithOptional(t => t.Creater);
+
+
+
+
+        }
+
         DbSet<Assessment> Assessments { get; set; }
         DbSet<Chat> Chats { get; set; }
         DbSet<City> Cities { get; set; }

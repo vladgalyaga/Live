@@ -31,7 +31,7 @@
 <h2>Index</h2>
 
 <p>
-    <input type="text" id="newFrandName" value="" placeholder="new frand name">  
+    <input type="text" id="newFrandName" value="" placeholder="new frand name">
     <input type='button' id="add" value='add frand'>
 
 </p>
@@ -72,7 +72,7 @@
                 url: '/Friends/AddFriend',
                 data: { name: $("#newFrandName").val() },
                 success: function (data, textStatus, jqXHR) {
-                    // jqXHR.status contains the Response.Status set on the server
+                    location.reload();
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     // jqXHR.status contains the Response.Status set on the server

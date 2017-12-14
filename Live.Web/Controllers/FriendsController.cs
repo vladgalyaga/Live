@@ -25,10 +25,9 @@ namespace Live.Web.Controllers
             return View(a);
         }
         [HttpPost]
-        public ActionResult AddFriend(string name)
+        public void AddFriend(string name)
         {
-            try
-            {
+          
                 var newFrand = _userRepository.GetFirstOrDefault(x => x.Name == name);
                 if (newFrand != null || !GetFriends().Contains(newFrand))
                 {
@@ -41,14 +40,7 @@ namespace Live.Web.Controllers
                     _unitOfWork.GetRepository<Friendship, int>().Create(frendShip);
                 }
                 var a = _unitOfWork.GetRepository<Friendship, int>().GetAll();
-                return Index();
-
-            }
-            catch (Exception ex)
-            {
-                var a = 3;
-            }
-            return Index();
+           // return Index();
         }
 
 
